@@ -102,4 +102,17 @@ const validate = (formValues) => {
   return errors;
 };
 
+const mapStateToProps = (state) => {
+  return {
+    initialValues: state.rootReducer,
+  };
+};
+const formWrapped = reduxForm({
+  form: "FormBuilder",
+  enableReinitialize: true,
+  validate,
+})(FieldBuilder);
 
+export default connect(mapStateToProps, { postFormValues, clearFormValues })(
+  formWrapped
+);
